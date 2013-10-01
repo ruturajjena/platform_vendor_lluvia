@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # Copyright (C) 2012-2013, The CyanogenMod Project
 # Copyright (C) 2012-2015, SlimRoms Project
-# Copyright (C) 2017, LLUVIA
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,8 +40,9 @@ except ImportError:
     urllib.request = urllib2
 
 DEBUG = False
-default_manifest = ".repo/manifests/LLuvia.xml"
-custom_local_manifest = ".repo/local_manifests/LLuvia.xml"
+default_manifest = ".repo/manifest.xml"
+
+custom_local_manifest = ".repo/local_manifests/LLuvia_manifest.xml"
 custom_default_revision = "8.1"
 custom_dependencies = "lluvia.dependencies"
 org_manifest = "LLuviaDevices"  # leave empty if org is provided in manifest
@@ -104,10 +104,7 @@ def load_manifest(manifest):
 
 
 def get_default(manifest=None):
-    if manifest is not None:
-        m = manifest
-    else:
-        m = load_manifest(default_manifest)
+    m = manifest or load_manifest(default_manifest)
     d = m.findall('default')[0]
     return d
 
@@ -325,7 +322,7 @@ def main():
         if repo_path:
             fetch_dependencies(repo_path)
         else:
-            print("Trying dependencies-only mode on a "
+            print("Trying dependencies-only mode on a"
                   "non-existing device tree?")
         sys.exit()
 
@@ -363,12 +360,11 @@ def main():
         repo_path = "device/%s/%s" % (manufacturer, device)
         adding = [{'repository': repo_name, 'target_path': repo_path}]
 
-        if not is_in_manifest(repo_path):
-            add_to_manifest(adding, fallback_branch)
+        add_to_manifest(adding, fallback_branch)
 
-            print("Syncing repository to retrieve project.")
-            os.system('repo sync --force-sync %s' % repo_path)
-            print("Repository synced!")
+        print("Syncing repository to retrieve project.")
+        os.system('repo sync --force-sync %s' % repo_path)
+        print("Repository synced!")
 
         fetch_dependencies(repo_path, fallback_branch)
         print("Done")
