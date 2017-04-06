@@ -82,7 +82,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     PixelLauncher \
     Launcher3 \
-    WallpaperPickerGoogle 
+    WallpaperPickerGoogle \
+    Turbo
 
 # Include explicitly to work around GMS issues
 PRODUCT_PACKAGES += \
