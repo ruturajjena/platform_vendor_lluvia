@@ -1,12 +1,8 @@
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
-ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.com.google.clientidbase=android-google
-else
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.com.google.clientidbase=$(PRODUCT_GMS_CLIENTID_BASE)
-endif
+# Bootanimation
+PRODUCT_COPY_FILES += \
+    vendor/aosp/prebuilt/common/media/bootanimation.zip:system/media/bootanimation.zip
 
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
