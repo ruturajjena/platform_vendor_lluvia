@@ -256,6 +256,13 @@ ifeq ($(LLUVIA_BUILD_TYPE), Official)
     LLUVIA_BUILD_TYPE := NATUREMADE
 endif
 
+# Include SDCLANG definitions if it is requested and available
+ifeq ($(HOST_OS),linux)
+    ifneq ($(wildcard vendor/qcom/sdclang-4.0/),)
+        include vendor/lluvia/sdclang/sdclang.mk
+    endif
+
+
 # Set all versions
 LLUVIA_VERSION := LLuvia-$(LLUVIA_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(LLUVIA_BUILD_TYPE)$(LLUVIA_POSTFIX)
 LLUVIA_MOD_VERSION := LLuvia-$(LLUVIA_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(LLUVIA_BUILD_TYPE)$(LLUVIA_POSTFIX)
