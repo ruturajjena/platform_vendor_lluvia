@@ -8,6 +8,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true \
     persist.debug.wfd.enable=1 \
     persist.sys.wfd.virtual=0 \
+    ro.boot.vendor.overlay.theme=com.google.android.theme.pixel \
     ro.build.selinux=1
 
 # Disable excessive dalvik debug messages
