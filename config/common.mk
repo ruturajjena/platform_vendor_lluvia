@@ -238,8 +238,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.modversion=$(lluvia_MOD_VERSION) \
     ro.lluvia.buildtype=$(lluvia_BUILD_TYPE) \
 
-EXTENDED_POST_PROCESS_PROPS := vendor/lluvia/tools/lluvia_process_props.py
-
 # Google sounds
 include vendor/lluvia/google/GoogleAudio.mk
 
+
+EXTENDED_POST_PROCESS_PROPS := vendor/lluvia/tools/gzosp_process_props.py
