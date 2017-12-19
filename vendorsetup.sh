@@ -1,3 +1,3 @@
-. "$(gettop)/vendor/gzosp/build/envsetup.sh"
+. "$(gettop)/vendor/lluvia/build/envsetup.sh"
 
-gzosp_device_combos
+lluvia_device_combos
