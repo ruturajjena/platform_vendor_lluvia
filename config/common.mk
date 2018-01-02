@@ -18,7 +18,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     vendor/lluvia/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
     vendor/lluvia/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/lluvia/prebuilt/common/bin/50-lluvia.sh:system/addon.d/50-lluvia.sh
+    vendor/lluvia/prebuilt/common/bin/50-lluvia.sh:system/addon.d/50-lluvia.sh \
+    vendor/lluvia/prebuilt/common/bin/clean_cache.sh:system/bin/clean_cache.sh
 
 # Backup services whitelist
 PRODUCT_COPY_FILES += \
