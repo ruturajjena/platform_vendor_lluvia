@@ -108,21 +108,8 @@ PRODUCT_PACKAGES += \
     ntfsfix \
     ntfs-3g
 
-# MusicFX advanced effects
-#ifneq ($(TARGET_NO_DSPMANAGER), true)
-#PRODUCT_PACKAGES += \
-#    libcyanogen-dsp \
-#    audio_effects.conf
-#endif
-
-# Custom off-mode charger
-#ifneq ($(WITH_CM_CHARGER),false)
-#PRODUCT_PACKAGES += \
-#    charger_res_images \
-#    cm_charger_res_images \
-#    font_log.png \
-#    libhealthd.cm
-#endif
+PRODUCT_PACKAGES += \
+    charger_res_images
 
 # DU Utils library
 #PRODUCT_BOOT_JARS += \
