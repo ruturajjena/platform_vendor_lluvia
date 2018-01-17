@@ -87,15 +87,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Calculator \
     LatinIME \
-    BluetoothExt
-#    ThemeInterfacer \
-#    Eleven \
-#    OmniSwitch \
-#    OmniJaws \
-#    OmniStyle \
-#    Turbo \
-#    Nova \
-#    NovaGoogleCompanion
+    OmniJaws \
+    BluetoothExt \
+    Launcher3Dark
 
 # Extra tools
 PRODUCT_PACKAGES += \
