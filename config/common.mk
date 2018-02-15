@@ -203,7 +203,7 @@ endif
 
 # Versioning System
 # lluvia first version.
-PRODUCT_VERSION_MAJOR = 8.1
+PRODUCT_VERSION_MAJOR = 8.1.0
 PRODUCT_VERSION_MINOR = ALPHA
 PRODUCT_VERSION_MAINTENANCE = 1.0
 lluvia_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
