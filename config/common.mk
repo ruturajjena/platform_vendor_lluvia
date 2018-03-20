@@ -156,10 +156,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # easy way to extend to add more packages
 -include vendor/extra/product.mk
 
+# Packages
 PRODUCT_PACKAGES += \
     DuiDarkTheme \
-    AndroidDarkThemeOverlay \
-    SettingsDarkThemeOverlay
+    SettingsDarkTheme \
+    SystemDarkTheme \
+    PixelTheme \
+    Stock
 
 PRODUCT_PACKAGE_OVERLAYS += vendor/lluvia/overlay/common
 
@@ -199,6 +202,32 @@ PRODUCT_COPY_FILES += \
     vendor/lluvia/prebuilt/common/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip:system/media/bootanimation.zip
 endif
 endif
+
+# Overlays
+PRODUCT_PACKAGES += \
+    AmberAccent \
+    BlackAccent \
+    BlueAccent \
+    BlueGreyAccent \
+    BrownAccent \
+    CyanAccent \
+    DeepOrangeAccent \
+    DeepPurpleAccent \
+    GreenAccent \
+    GreyAccent \
+    IndigoAccent \
+    LightBlueAccent \
+    LightGreenAccent \
+    LimeAccent \
+    OrangeAccent \
+    PinkAccent \
+    PurpleAccent \
+    RedAccent \
+    TealAccent \
+    YellowAccent \
+    WhiteAccent
+
+PRODUCT_PACKAGE_OVERLAYS += vendor/lluvia/overlay/common
 
 # Versioning System
 # lluvia first version.
