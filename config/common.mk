@@ -205,6 +205,15 @@ endif
 endif
 
 # Overlays
+# BlackAF Theme
+PRODUCT_PACKAGES += \
+    DuiBlackAF \
+    GBoardBlackAF \
+    SettingsBlackAF \
+    SystemBlackAF \
+    UpdaterBlackAF \
+
+# Accents
 PRODUCT_PACKAGES += \
     AmberAccent \
     BlackAccent \
