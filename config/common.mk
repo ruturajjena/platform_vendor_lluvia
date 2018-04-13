@@ -267,5 +267,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Google sounds
 include vendor/lluvia/google/GoogleAudio.mk
 
+# Unlimited photo storage in Google Photos
+PRODUCT_COPY_FILES += \
+    vendor/lluvia/prebuilt/etc/sysconfig/pixel_2017_exclusive.xml:system/etc/sysconfig/pixel_2017_exclusive.xml
 
-EXTENDED_POST_PROCESS_PROPS := vendor/lluvia/tools/gzosp_process_props.py
+EXTENDED_POST_PROCESS_PROPS := vendor/lluvia/tools/lluvia_process_props.py
