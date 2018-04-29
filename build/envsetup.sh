@@ -5,7 +5,7 @@ function lluvia_device_combos()
     local T list_file variant device
 
     T="$(gettop)"
-    list_file="${T}/vendor/llos/LLuvia.devices"
+    list_file="${T}/vendor/lluvia/LLuvia.devices"
     variant="userdebug"
 
     if [[ $1 ]]
@@ -27,7 +27,7 @@ function lluvia_device_combos()
     if [[ ! -f "${list_file}" ]]
     then
         echo "unable to find device list: ${list_file}"
-        list_file="${T}/vendor/llos/LLuvia.devices"
+        list_file="${T}/vendor/lluvia/LLuvia.devices"
         echo "defaulting device list file to: ${list_file}"
     fi
 
