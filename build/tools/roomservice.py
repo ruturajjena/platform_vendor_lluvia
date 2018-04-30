@@ -41,7 +41,7 @@ except ImportError:
     urllib.request = urllib2
 
 DEBUG = False
-default_manifest = ".repo/manifests/default.xml"
+default_manifest = ".repo/manifests/lluvia.xml"
 custom_local_manifest = ".repo/local_manifests/lluvia.xml"
 custom_default_revision = "8.1"
 custom_dependencies = "lluvia.dependencies"
