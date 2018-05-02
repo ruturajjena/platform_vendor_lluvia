@@ -19,7 +19,7 @@ LOCAL_PATH := $(call my-dir)
 #
 include $(CLEAR_VARS)
 LOCAL_MODULE := MagiskManager
-LOCAL_MODULE_OWNER := gzosp
+LOCAL_MODULE_OWNER := lluvia
 LOCAL_SRC_FILES := common/app/$(LOCAL_MODULE).apk
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_SUFFIX := .apk
