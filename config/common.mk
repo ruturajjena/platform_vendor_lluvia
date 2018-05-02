@@ -245,29 +245,29 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGE_OVERLAYS += vendor/lluvia/overlay/common
 
 # Versioning System
-# lluvia first version.
+# LLUVIA first version.
 PRODUCT_VERSION_MAJOR = 8.1.0
 PRODUCT_VERSION_MINOR = ALPHA
 PRODUCT_VERSION_MAINTENANCE = 1.0
-lluvia_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
-ifdef lluvia_BUILD_EXTRA
-    lluvia_POSTFIX := -$(lluvia_BUILD_EXTRA)
+LLUVIA_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
+ifdef LLUVIA_BUILD_EXTRA
+    LLUVIA_POSTFIX := -$(LLUVIA_BUILD_EXTRA)
 endif
 
-ifndef lluvia_BUILD_TYPE
-    lluvia_BUILD_TYPE := UNOFFICIAL
+ifndef LLUVIA_BUILD_TYPE
+    LLUVIA_BUILD_TYPE := UNOFFICIAL
 endif
 
 # Set all versions
-lluvia_VERSION := lluvia-$(lluvia_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(lluvia_BUILD_TYPE)$(lluvia_POSTFIX)
-lluvia_MOD_VERSION := lluvia-$(lluvia_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(lluvia_BUILD_TYPE)$(lluvia_POSTFIX)
+LLUVIA_VERSION := LLuvia-$(LLUVIA_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(LLUVIA_BUILD_TYPE)$(LLUVIA_POSTFIX)
+LLUVIA_MOD_VERSION := LLuvia-$(LLUVIA_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(LLUVIA_BUILD_TYPE)$(LLUVIA_POSTFIX)
 
 PRODUCT_PROPERTY_OVERRIDES += \
     BUILD_DISPLAY_ID=$(BUILD_ID) \
     lluvia.ota.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE) \
-    ro.lluvia.version=$(lluvia_VERSION) \
-    ro.modversion=$(lluvia_MOD_VERSION) \
-    ro.lluvia.buildtype=$(lluvia_BUILD_TYPE) \
+    ro.lluvia.version=$(LLUVIA_VERSION) \
+    ro.modversion=$(LLUVIA_MOD_VERSION) \
+    ro.lluvia.buildtype=$(LLUVIA_BUILD_TYPE) \
 
 # Google sounds
 include vendor/lluvia/google/GoogleAudio.mk
