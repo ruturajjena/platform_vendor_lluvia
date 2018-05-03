@@ -74,7 +74,7 @@ function lluviaremote()
         echo "Not in a git directory. Please run this from an Android repository you wish to set up."
         return
     fi
-    git remote rm gzosp 2> /dev/null
+    git remote rm lluvia 2> /dev/null
 
     proj="$(pwd -P | sed "s#$ANDROID_BUILD_TOP/##g")"
 
@@ -145,11 +145,11 @@ function cafremote()
     echo "Remote 'caf' created"
 }
 
-function gzosp_push()
+function lluvia_push()
 {
     local branch ssh_name path_opt proj
     branch="lp5.1"
-    ssh_name="gzosp_review"
+    ssh_name="lluvia_review"
     path_opt=
 
     if [[ "$1" ]]
