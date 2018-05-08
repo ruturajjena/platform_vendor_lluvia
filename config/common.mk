@@ -122,6 +122,10 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_PACKAGES += \
     org.dirtyunicorns.utils
 
+# RainBow
+PRODUCT_PACKAGES += \
+    RainBow
+    
 #ifeq ($(DEFAULT_ROOT_METHOD),magisk)
 # Magisk Manager
 #PRODUCT_PACKAGES += \
