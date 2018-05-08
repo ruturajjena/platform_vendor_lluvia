@@ -77,7 +77,8 @@ PRODUCT_PACKAGES += \
 
 # Prebuilt packages
 PRODUCT_PACKAGES += \
-    PixelLauncher
+    PixelLauncher \
+    Launcher3
 
 # Include explicitly to work around GMS issues
 PRODUCT_PACKAGES += \
