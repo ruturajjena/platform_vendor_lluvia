@@ -127,28 +127,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     RainBow
     
-#ifeq ($(DEFAULT_ROOT_METHOD),magisk)
-# Magisk Manager
-#PRODUCT_PACKAGES += \
-#    MagiskManager
-
-# Magisk
-#PRODUCT_COPY_FILES += \
-#   vendor/lluvia/prebuilt/common/addon.d/magisk.zip:system/addon.d/magisk.zip
-#endif
-
-#ifeq ($(DEFAULT_ROOT_METHOD),supersu)
-# SuperSU
-#PRODUCT_COPY_FILES += \
-#   vendor/lluvia/prebuilt/common/etc/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
-#   vendor/lluvia/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
-#endif
-
-# Explict rootless defined, or none of the root methods defined,
-# default rootless : nothing todo
-#ifeq ($(DEFAULT_ROOT_METHOD),rootless)
-#endif
-
 # Stagefright FFMPEG plugin
 PRODUCT_PACKAGES += \
     libffmpeg_extractor \
