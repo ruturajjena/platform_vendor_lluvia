@@ -78,7 +78,9 @@ PRODUCT_PACKAGES += \
 # Prebuilt packages
 PRODUCT_PACKAGES += \
     PixelLauncher \
-    Launcher3
+    Launcher3 \
+    RetroMusicPlayer \
+    WallpaperPickerGoogle 
 
 # Include explicitly to work around GMS issues
 PRODUCT_PACKAGES += \
