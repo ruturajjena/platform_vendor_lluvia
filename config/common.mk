@@ -97,7 +97,8 @@ PRODUCT_PACKAGES += \
     LatinIME \
     OmniJaws \
     BluetoothExt \
-    Launcher3Dark
+    Launcher3Dark \
+    Poweramp-beta-preview-build-790-uni
 
 # Extra tools
 PRODUCT_PACKAGES += \
