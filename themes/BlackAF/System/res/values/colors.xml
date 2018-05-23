@@ -57,5 +57,9 @@
     <!-- Toast text and bg colors -->
     <color name="toast_bg_color">@*android:color/black</color>
     <color name="toast_text_color">@android:color/white</color>
+    <color name="background_floating_material_dark">#ff111111</color>
+
+    <!-- Two target preference vertical divider color -->
+    <color name="list_divider_dark">@*android:color/black</color>
 
 </resources>
