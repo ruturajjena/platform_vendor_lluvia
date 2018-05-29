@@ -185,6 +185,6 @@ function hmm() #hidden
     done |column
 }
 
-lluvia_append_hmm "gzospremote" "Add a git remote for matching lluvia repository"
+lluvia_append_hmm "lluviaremote" "Add a git remote for matching lluvia repository"
 lluvia_append_hmm "aospremote" "Add git remote for matching AOSP repository"
 lluvia_append_hmm "cafremote" "Add git remote for matching CodeAurora repository."
