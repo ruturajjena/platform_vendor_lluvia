@@ -14,7 +14,7 @@ fi
 touch $Changelog
 
 # Print something to build output
-echo ${bldppl}"Generating changelog..."${txtrst}
+echo "Generating changelog..."
 
 for i in $(seq 5);
 do
@@ -36,4 +36,5 @@ done
 sed -i 's/project/   */g' $Changelog
 
 cp $Changelog $OUT/system/etc/
-rm $Changelog
+cp $Changelog $OUT/
+rm -rf $Changelog
