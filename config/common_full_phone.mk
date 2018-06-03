@@ -9,3 +9,7 @@ PRODUCT_PACKAGES += \
 # SMS
 PRODUCT_PACKAGES += \
 	messaging
+
+# LLuviaOTA
+PRODUCT_PACKAGES += \
+    LLuviaOTA
