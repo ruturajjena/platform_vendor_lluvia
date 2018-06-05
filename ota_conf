@@ -1,0 +1,8 @@
+#Common OTA url for all devices
+ota_url=https://sourceforge.net/projects/lluviaos-v-1-x/files
+release_type=Stable
+device_name=ro.lluvia.device
+version_source=ro.lluvia.ota.version
+version_delimiter=-
+version_position=3
+version_format=yyyyMMdd
