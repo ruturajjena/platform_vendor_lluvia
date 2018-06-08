@@ -231,7 +231,7 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/lluvia/overlay/common
 # Versioning System
 # LLUVIA first version.
 PRODUCT_VERSION_MAJOR = 8.1.0
-PRODUCT_VERSION_MINOR = ALPHA
+PRODUCT_VERSION_MINOR = Stable
 PRODUCT_VERSION_MAINTENANCE = 1.3
 LLUVIA_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
 ifdef LLUVIA_BUILD_EXTRA
