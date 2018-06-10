@@ -125,6 +125,11 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_PACKAGES += \
     org.dirtyunicorns.utils
 
+# Bring in camera effects
+PRODUCT_COPY_FILES +=  \
+    vendor/lluvia/prebuilt/common/media/LMspeed_508.emd:system/vendor/media/LMspeed_508.emd \
+    vendor/lluvia/prebuilt/common/media/PFFprec_600.emd:system/vendor/media/PFFprec_600.emd
+
 # LLuvia OTA
 include vendor/lluvia/config/ota.mk
 
@@ -231,7 +236,7 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/lluvia/overlay/common
 # Versioning System
 # LLUVIA first version.
 PRODUCT_VERSION_MAJOR = 8.1.0
-PRODUCT_VERSION_MINOR = ALPHA
+PRODUCT_VERSION_MINOR = Stable
 PRODUCT_VERSION_MAINTENANCE = 1.3
 LLUVIA_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
 ifdef LLUVIA_BUILD_EXTRA
