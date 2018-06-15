@@ -1,6 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 # Copyright (C) 2012-2013, The CyanogenMod Project
 # Copyright (C) 2012-2015, SlimRoms Project
+# Copyright (C) 2018,   The Android Modified Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,7 +43,7 @@ except ImportError:
 DEBUG = False
 default_manifest = ".repo/manifest.xml"
 
-custom_local_manifest = ".repo/local_manifests/LLuvia_manifest.xml"
+custom_local_manifest = ".repo/local_manifests/lluvia_manifest.xml"
 custom_default_revision = "8.1"
 custom_dependencies = "lluvia.dependencies"
 org_manifest = "LLuviaDevices"  # leave empty if org is provided in manifest
@@ -109,11 +110,6 @@ def get_default(manifest=None):
     return d
 
 
-def get_default_revision(manifest=None):
-    r = get_default(manifest=manifest).get('revision')
-    return r.replace('refs/heads/', '').replace('refs/tags/', '')
-
-
 def get_remote(manifest=None, remote_name=None):
     m = manifest or load_manifest(default_manifest)
     if not remote_name:
@@ -125,27 +121,26 @@ def get_remote(manifest=None, remote_name=None):
 
 
 def get_revision(manifest=None, p="build"):
+    return custom_default_revision
     m = manifest or load_manifest(default_manifest)
     project = None
     for proj in m.findall('project'):
         if proj.get('path').strip('/') == p:
             project = proj
             break
-    if project is None:
-        return get_default_revision(manifest=m)
     revision = project.get('revision')
     if revision:
         return revision.replace('refs/heads/', '').replace('refs/tags/', '')
     remote = get_remote(manifest=m, remote_name=project.get('remote'))
     revision = remote.get('revision')
     if not revision:
-        return get_default_revision(manifest=None)
+        return custom_default_revision
     return revision.replace('refs/heads/', '').replace('refs/tags/', '')
 
 
 def get_from_manifest(device_name):
-    for man in (custom_local_manifest, default_manifest):
-        man = load_manifest(man)
+    if os.path.exists(custom_local_manifest):
+        man = load_manifest(custom_local_manifest)
         for local_path in man.findall("project"):
             lp = local_path.get("path").strip('/')
             if lp.startswith("device/") and lp.endswith("/" + device_name):
@@ -154,11 +149,9 @@ def get_from_manifest(device_name):
 
 
 def is_in_manifest(project_path):
-    for man in (custom_local_manifest, default_manifest):
-        man = load_manifest(man)
-        for local_path in man.findall("project"):
-            if local_path.get("path") == project_path:
-                return True
+    for local_path in load_manifest(custom_local_manifest).findall("project"):
+        if local_path.get("path") == project_path:
+            return True
     return False
 
 
@@ -167,31 +160,42 @@ def add_to_manifest(repos, fallback_branch=None):
 
     for repo in repos:
         repo_name = repo['repository']
-        repo_target = repo['target_path']
-        if is_in_manifest(repo_target):
-            print('already exists: %s' % repo_target)
+        repo_path = repo['target_path']
+        if 'branch' in repo:
+            repo_branch=repo['branch']
+        else:
+            repo_branch=custom_default_revision
+        if 'remote' in repo:
+            repo_remote=repo['remote']
+        elif "/" not in repo_name:
+            repo_remote=org_manifest
+        elif "/" in repo_name:
+            repo_remote="github"
+
+        if is_in_manifest(repo_path):
+            print('already exists: %s' % repo_path)
             continue
 
-        if "/" not in repo_name:
-            repo_name = os.path.join(org_manifest, repo_name)
-
-        print('Adding dependency: %s -> %s' % (repo_name, repo_target))
+        print('Adding dependency:\nRepository: %s\nBranch: %s\nRemote: %s\nPath: %s\n' % (repo_name, repo_branch,repo_remote, repo_path))
 
         project = ElementTree.Element(
             "project",
-            attrib={"path": repo_target,
-                    "remote": "github",
+            attrib={"path": repo_path,
+                    "remote": repo_remote,
                     "name": "%s" % repo_name}
         )
 
-        if 'branch' in repo:
-            project.set('revision', repo['branch'])
+        if repo_branch is not None:
+            project.set('revision', repo_branch)
         elif fallback_branch:
             print("Using branch %s for %s" %
                   (fallback_branch, repo_name))
             project.set('revision', fallback_branch)
         else:
             print("Using default branch for %s" % repo_name)
+        if 'clone-depth' in repo:
+            print("Setting clone-depth to %s for %s" % (repo['clone-depth'], repo_name))
+            project.set('clone-depth', repo['clone-depth'])
         lm.append(project)
 
     indent(lm)
@@ -232,14 +236,16 @@ def fetch_dependencies(repo_path, fallback_branch=None):
 
             fetch_list.append(dependency)
             syncable_repos.append(dependency['target_path'])
+        else:
+            print("Dependency already present in manifest: %s => %s" % (dependency['repository'], dependency['target_path']))
 
     if fetch_list:
-        print('Adding dependencies to manifest')
+        print('Adding dependencies to manifest\n')
         add_to_manifest(fetch_list, fallback_branch)
 
     if syncable_repos:
         print('Syncing dependencies')
-        os.system('repo sync --force-sync %s' % ' '.join(syncable_repos))
+        os.system('repo sync --force-sync --no-tags --current-branch --no-clone-bundle %s' % ' '.join(syncable_repos))
 
     for deprepo in syncable_repos:
         fetch_dependencies(deprepo)
@@ -261,27 +267,10 @@ def detect_revision(repo):
     result = json.loads(urllib.request.urlopen(githubreq).read().decode())
 
     calc_revision = get_revision()
-    default_revision = get_default_revision()
     print("Calculated revision: %s" % calc_revision)
-    print("Default revision: %s" % default_revision)
 
-
-    if calc_revision != default_revision and has_branch(result, calc_revision):
+    if has_branch(result, calc_revision):
         return calc_revision
-    if has_branch(result, default_revision):
-        return None
-
-    # Try tags, too, since that's what releases use
-    githubreq = urllib.request.Request(
-        repo['tags_url'].replace('{/tag}', ''))
-    add_auth(githubreq)
-    result.extend(json.loads(
-        urllib.request.urlopen(githubreq).read().decode()))
-
-    if calc_revision != default_revision and has_branch(result, calc_revision):
-        return calc_revision
-    if has_branch(result, default_revision):
-        return None
 
     fallbacks = os.getenv('ROOMSERVICE_BRANCHES', '').split()
     for fallback in fallbacks:
@@ -294,8 +283,6 @@ def detect_revision(repo):
               % custom_default_revision)
         return custom_default_revision
 
-    print("Default revision %s not found in %s. Bailing." %
-          (default_revision, repo['name']))
     print("Branches found:")
     for branch in result:
         print(branch['name'])
@@ -322,7 +309,7 @@ def main():
         if repo_path:
             fetch_dependencies(repo_path)
         else:
-            print("Trying dependencies-only mode on a"
+            print("Trying dependencies-only mode on a "
                   "non-existing device tree?")
         sys.exit()
 
@@ -363,7 +350,7 @@ def main():
         add_to_manifest(adding, fallback_branch)
 
         print("Syncing repository to retrieve project.")
-        os.system('repo sync --force-sync %s' % repo_path)
+        os.system('repo sync --force-sync --no-tags --current-branch --no-clone-bundle %s' % repo_path)
         print("Repository synced!")
 
         fetch_dependencies(repo_path, fallback_branch)
