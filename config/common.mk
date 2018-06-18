@@ -133,6 +133,10 @@ PRODUCT_COPY_FILES +=  \
 # LLuvia OTA
 include vendor/lluvia/config/ota.mk
 
+# LLuviaStorm
+PRODUCT_PACKAGES += \
+    LLuviaStorm
+
 # Stagefright FFMPEG plugin
 PRODUCT_PACKAGES += \
     libffmpeg_extractor \
