@@ -12,7 +12,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.selinux=1 \
     ro.setupwizard.require_network=any \
     ro.setupwizard.mode=OPTIONAL \
-    ro.setupwizard.rotation_locked=true 
+    ro.setupwizard.rotation_locked=true \
+    ro.control_privapp_permissions=enforce 
 
 # Disable excessive dalvik debug messages
 PRODUCT_PROPERTY_OVERRIDES += \
