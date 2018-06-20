@@ -11,7 +11,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.boot.vendor.overlay.theme=com.google.android.theme.pixel \
     ro.build.selinux=1 \
     ro.setupwizard.mode=OPTIONAL \
-    ro.setupwizard.rotation_locked=true 
+    ro.setupwizard.rotation_locked=true \
+    persist.sys.disable_rescue=true
 
 # Disable excessive dalvik debug messages
 PRODUCT_PROPERTY_OVERRIDES += \
