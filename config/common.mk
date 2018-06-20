@@ -9,7 +9,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.wfd.enable=1 \
     persist.sys.wfd.virtual=0 \
     ro.boot.vendor.overlay.theme=com.google.android.theme.pixel \
-    ro.build.selinux=1
+    ro.build.selinux=1 \
+    ro.setupwizard.require_network=any \
+    ro.setupwizard.mode=OPTIONAL \
+    ro.setupwizard.rotation_locked=true 
 
 # Disable excessive dalvik debug messages
 PRODUCT_PROPERTY_OVERRIDES += \
