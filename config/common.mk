@@ -104,14 +104,32 @@ PRODUCT_PACKAGES += \
 
 # Extra tools
 PRODUCT_PACKAGES += \
-    openvpn \
     e2fsck \
     mke2fs \
     tune2fs \
+    mount.exfat \
     fsck.exfat \
     mkfs.exfat \
-    ntfsfix \
-    ntfs-3g
+    mkfs.f2fs \
+    fsck.f2fs \
+    fibmap.f2fs \
+    mkfs.ntfs \
+    fsck.ntfs \
+    mount.ntfs \
+    7z \
+    bzip2 \
+    curl \
+    lib7z \
+    powertop \
+    pigz \
+    tinymix \
+    unrar \
+    unzip \
+    zip
+
+# Exchange support
+PRODUCT_PACKAGES += \
+    Exchange2
 
 PRODUCT_PACKAGES += \
     charger_res_images
