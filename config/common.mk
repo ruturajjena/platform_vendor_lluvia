@@ -129,8 +129,8 @@ PRODUCT_PACKAGES += \
 
 # Bring in camera effects
 PRODUCT_COPY_FILES +=  \
-    vendor/lluvia/prebuilt/common/media/LMspeed_508.emd:system/vendor/media/LMspeed_508.emd \
-    vendor/lluvia/prebuilt/common/media/PFFprec_600.emd:system/vendor/media/PFFprec_600.emd
+    vendor/lluvia/prebuilt/common/media/LMspeed_508.emd:system/media/LMspeed_508.emd \
+    vendor/lluvia/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
 
 # LLuvia OTA
 include vendor/lluvia/config/ota.mk
