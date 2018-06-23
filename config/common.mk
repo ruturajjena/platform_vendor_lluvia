@@ -298,7 +298,7 @@ ifeq ($(HOST_OS),linux)
     ifneq ($(wildcard vendor/qcom/sdclang-4.0/),)
         include vendor/lluvia/sdclang/sdclang.mk
     endif
-
+endif
 
 # Set all versions
 LLUVIA_VERSION := LLuvia-$(LLUVIA_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(LLUVIA_BUILD_TYPE)$(LLUVIA_POSTFIX)
