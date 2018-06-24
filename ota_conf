@@ -1,8 +1,0 @@
-#Common OTA url for all devices
-ota_url=ota_url=https://raw.githubusercontent.com/LLuviaOS/OTA_config/8.1/lluvia_ota.xml
-release_type=ALPHA
-device_name=ro.lluvia.device
-version_source=ro.lluvia.ota.version
-version_delimiter=-
-version_position=3
-version_format=yyyyMMdd

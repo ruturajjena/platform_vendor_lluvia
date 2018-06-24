@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ROM>
+  <RomName>LLUVIA_OTA_ROM</RomName>
+  <VersionName>LLUVIA_OTA_VERSION</VersionName>
+  <VersionNumber type="integer">LLUVIA_OTA_VERNUM</VersionNumber>
+  <DirectUrl>LLUVIA_OTA_URL</DirectUrl>
+  <HttpUrl>LLUVIA_HTTP_URL</HttpUrl>
+  <Android>8.1.0</Android>
+  <CheckMD5>LLUVIA_OTA_MD5</CheckMD5>
+  <FileSize type="integer">LLUVIA_OTA_FILESIZE</FileSize>
+  <Changelog>
+    *Check LLUVIAOS telegram channel for weekly changelogs.
+  </Changelog>
+</ROM>

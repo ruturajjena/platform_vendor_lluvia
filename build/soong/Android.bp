@@ -1,6 +1,6 @@
 bootstrap_go_package {
-    name: "soong-lluvia-android",
-    pkgPath: "lluvia/soong/android_lluvia",
+    name: "soong-lluvia",
+    pkgPath: "lluvia/soong/android",
     srcs: [
         "android/variable.go",
     ],

@@ -2,6 +2,8 @@
 #
 # Print startup info
 #
-L="log -p i -t lluvia"
+L="log -p i -t dot"
 
-$L "Welcome to Android `getprop ro.build.version.release` / LLuvia `getprop ro.lluvia.version`";
+
+
+$L "Welcome to Android `getprop ro.build.version.release` / by dotOS";

@@ -1,0 +1,59 @@
+#!/bin/bash
+
+device=$(echo $TARGET_PRODUCT | cut -d _ -f 2,3)
+echo ".................................."
+echo "....Generating OTA for $device...."
+echo ".................................."
+start_dir=`pwd`
+
+if [ -f $start_dir/*.xml ]; then
+	rm $start_dir/*.xml
+fi
+
+cp vendor/lluvia/ota.xml $start_dir/$device.xml
+
+touch $start_dir/$device.xml
+
+source build/envsetup.sh
+
+LLUVIA_VERSION=$(get_build_var LLUVIA_VERSION)
+
+LLUVIA_OTA_MD5=$(cat "$OUT/$LLUVIA_VERSION.zip.md5sum" | cut -d ' ' -f 1)
+LLUVIA_OTA_FILESIZE=$(ls -la "$OUT/$LLUVIA_VERSION.zip" | cut -d ' ' -f 5)
+LLUVIA_OTA_ROM=lluvia_"$device"
+LLUVIA_OTA_VERNUM=$(date +%Y%m%d)
+LLUVIA_OTA_URL=https://download.lluviaos.ml/$device/$LLUVIA_VERSION.zip
+LLUVIA_HTTP_URL=https://download.lluviaos.ml/$device
+
+sed -i "s/LLUVIA_OTA_ROM/$LLUVIA_OTA_ROM/g" $start_dir/$device.xml
+sed -i "s/LLUVIA_OTA_VERSION/$LLUVIA_VERSION/g" $start_dir/$device.xml
+sed -i "s/LLUVIA_OTA_VERNUM/$LLUVIA_OTA_VERNUM/g" $start_dir/$device.xml
+sed -i "s|LLUVIA_OTA_URL|$LLUVIA_OTA_URL|g" $start_dir/$device.xml
+sed -i "s|LLUVIA_HTTP_URL|$LLUVIA_HTTP_URL|g" $start_dir/$device.xml
+sed -i "s/LLUVIA_OTA_MD5/$LLUVIA_OTA_MD5/g" $start_dir/$device.xml
+sed -i "s/LLUVIA_OTA_FILESIZE/$LLUVIA_OTA_FILESIZE/g" $start_dir/$device.xml
+
+push() {
+        cd ${ANDROID_BUILD_TOP}/ota
+	git reset --hard HEAD
+	git clean -f
+	git pull
+	cp $start_dir/$device.xml ${ANDROID_BUILD_TOP}/ota/$device.xml
+        git add -A
+        git commit -m "$device: weekly update ($(date +'%d/%m/%Y'))"
+        git push --force origin llovizna-release
+	cd ${ANDROID_BUILD_TOP}
+
+	if [ $? -ne 0 ]; then
+		echo "Failed to push xml!!"
+		cd ${ANDROID_BUILD_TOP}
+	fi
+}
+
+if [ -d ${ANDROID_BUILD_TOP}/ota ]; then
+	push
+else
+	cd ${ANDROID_BUILD_TOP}
+	git clone git@github.com:LLuviaOS/services_apps_ota.git ota
+	push
+fi
